@@ -1,0 +1,446 @@
+{% extends 'public/base_cpanel.html' %}
+{% block title %}Crud con Python 🐍 | Gestión de Equipos{% endblock %}
+{% block body %}
+
+<div class="card" style="border-radius: 0px !important">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-12 mb-4">
+      <h3 class="text-center mt-5 mb-3">GESTIÓN DE EQUIPOS</h3>
+      <hr />
+    </div>
+    <div class="container my-4" id="formCrearEquipo">
+      <form action="/crear-equipo" method="POST" class="needs-validation" novalidate>
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0">Crear Equipo</h4>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="numeroSerie" class="form-label">Número de Serie:</label>
+                <input type="text" class="form-control" id="numeroSerie" name="numero_serie" placeholder="Ej: SN123456789" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa el número de serie.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="marca" class="form-label">Marca:</label>
+                <input type="text" class="form-control" id="marca" name="marca" placeholder="Ej: Dell, HP, Apple" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la marca.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="modelo" class="form-label">Modelo:</label>
+                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ej: Latitude 7420, MacBook Air" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa el modelo.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="tipoDispositivo" class="form-label">Tipo de Dispositivo:</label>
+                <select class="form-select" id="tipoDispositivo" name="tipo_dispositivo" required>
+                  <option selected disabled value="">Selecciona...</option>
+                  <option>Laptop</option>
+                  <option>Desktop</option>
+                  <option>Servidor</option>
+                  <option>Workstation</option>
+                  <option>Tablet</option>
+                  <option>Otro</option>
+                </select>
+                <div class="invalid-feedback">
+                  Por favor, selecciona un tipo de dispositivo.
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="procesador" class="form-label">Procesador (Fabricante/Modelo):</label>
+                <input type="text" class="form-control" id="procesador" name="procesador" placeholder="Ej: Intel Core i7-1185G7, Apple M2" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la información del procesador.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="ram" class="form-label">Memoria RAM (Capacidad):</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="ram" name="ram_capacidad" placeholder="Ej: 8, 16" min="1" required>
+                  <span class="input-group-text">GB</span>
+                </div>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la capacidad de RAM en GB.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="almacenamiento" class="form-label">Almacenamiento (Tipo/Capacidad):</label>
+                <input type="text" class="form-control" id="almacenamiento" name="almacenamiento" placeholder="Ej: SSD 512GB, HDD 1TB" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la información de almacenamiento.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="sistemaOperativo" class="form-label">Sistema Operativo:</label>
+                <input type="text" class="form-control" id="sistemaOperativo" name="sistema_operativo" placeholder="Ej: Windows 11 Pro, macOS Sonoma" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa el sistema operativo.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="estado" class="form-label">Estado:</label>
+                <select class="form-select" id="estado" name="estado" required>
+                  <option selected disabled value="">Selecciona...</option>
+                  <option>En Uso</option>
+                  <option>En Reparación</option>
+                  <option>Almacenada</option>
+                  <option>Dada de Baja</option>
+                </select>
+                <div class="invalid-feedback">
+                  Por favor, selecciona el estado.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="ubicacion" class="form-label">Ubicación/Departamento:</label>
+                <input type="text" class="form-control" id="ubicacion" name="ubicacion" placeholder="Ej: Biblioteca - Sala 3, Laboratorio A" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la ubicación o departamento.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="fechaAdquisicion" class="form-label">Fecha de Adquisición:</label>
+                <input type="date" class="form-control" id="fechaAdquisicion" name="fecha_adquisicion" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la fecha de adquisición.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="usuarioAsignado" class="form-label">Usuario Asignado:</label>
+                <input type="text" class="form-control" id="usuarioAsignado" name="usuario_asignado" placeholder="Ej: Juan Pérez (Opcional)">
+              </div>
+            </div>
+          </div>
+          <div class="card-footer bg-light d-flex justify-content-end">
+            <button id="botonCrearEquipo" class="btn btn-primary" type="submit">
+              Crear Equipo
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // JavaScript para habilitar la validación de formularios de Bootstrap
+      (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+
+              form.classList.add('was-validated')
+            }, false)
+          })
+      })()
+    </script>
+
+
+    <div class="container my-4" id="formActualizar" style="display: none;">
+      <form action="{{ url_for('updateEquipo') }}" method="POST" class="needs-validation" novalidate>
+        <div class="card shadow-sm">
+          <div class="card-header eva-header text-center">
+            <h4 class="mb-0">Actualizar Equipo</h4>
+          </div>
+          <div class="card-body">
+            <input type="hidden" name="id_equipo" id="updateEquipoId">
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="updateNumeroSerie" class="form-label">Número de Serie:</label>
+                <input type="text" class="form-control" id="updateNumeroSerie" name="numero_serie" placeholder="Ej: SN123456789" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa el número de serie.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateMarca" class="form-label">Marca:</label>
+                <input type="text" class="form-control" id="updateMarca" name="marca" placeholder="Ej: Dell, HP, Apple" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la marca.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateModelo" class="form-label">Modelo:</label>
+                <input type="text" class="form-control" id="updateModelo" name="modelo" placeholder="Ej: Latitude 7420, MacBook Air" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa el modelo.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateTipoDispositivo" class="form-label">Tipo de Dispositivo:</label>
+                <select class="form-select" id="updateTipoDispositivo" name="tipo_dispositivo" required>
+                  <option selected disabled value="">Selecciona...</option>
+                  <option>Laptop</option>
+                  <option>Desktop</option>
+                  <option>Servidor</option>
+                  <option>Workstation</option>
+                  <option>Tablet</option>
+                  <option>Otro</option>
+                </select>
+                <div class="invalid-feedback">
+                  Por favor, selecciona un tipo de dispositivo.
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="updateProcesador" class="form-label">Procesador (Fabricante/Modelo):</label>
+                <input type="text" class="form-control" id="updateProcesador" name="procesador" placeholder="Ej: Intel Core i7-1185G7, Apple M2" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la información del procesador.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateRam" class="form-label">Memoria RAM (Capacidad):</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="updateRam" name="ram_capacidad" placeholder="Ej: 8, 16" min="1" required>
+                  <span class="input-group-text">GB</span>
+                </div>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la capacidad de RAM en GB.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateAlmacenamiento" class="form-label">Almacenamiento (Tipo/Capacidad):</label>
+                <input type="text" class="form-control" id="updateAlmacenamiento" name="almacenamiento" placeholder="Ej: SSD 512GB, HDD 1TB" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la información de almacenamiento.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateSistemaOperativo" class="form-label">Sistema Operativo:</label>
+                <input type="text" class="form-control" id="updateSistemaOperativo" name="sistema_operativo" placeholder="Ej: Windows 11 Pro, macOS Sonoma" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa el sistema operativo.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateEstado" class="form-label">Estado:</label>
+                <select class="form-select" id="updateEstado" name="estado" required>
+                  <option selected disabled value="">Selecciona...</option>
+                  <option>En Uso</option>
+                  <option>En Reparación</option>
+                  <option>Almacenada</option>
+                  <option>Dada de Baja</option>
+                </select>
+                <div class="invalid-feedback">
+                  Por favor, selecciona el estado.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateUbicacion" class="form-label">Ubicación/Departamento:</label>
+                <input type="text" class="form-control" id="updateUbicacion" name="ubicacion" placeholder="Ej: Biblioteca - Sala 3, Laboratorio A" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la ubicación o departamento.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateFechaAdquisicion" class="form-label">Fecha de Adquisición:</label>
+                <input type="date" class="form-control" id="updateFechaAdquisicion" name="fecha_adquisicion" required>
+                <div class="invalid-feedback">
+                  Por favor, ingresa la fecha de adquisición.
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="updateUsuarioAsignado" class="form-label">Usuario Asignado:</label>
+                <input type="text" class="form-control" id="updateUsuarioAsignado" name="usuario_asignado" placeholder="Ej: Juan Pérez (Opcional)">
+              </div>
+            </div>
+          </div>
+          <div class="card-footer bg-light d-flex justify-content-end">
+            <button id="botonActualizarEquipo" class="btn eva-btn-green me-2" type="submit">
+              Actualizar Equipo
+            </button>
+            <button class="btn btn-outline-secondary" onclick="ocultarFormActualizar()" type="button">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // Función para ocultar el formulario de actualización
+      function ocultarFormActualizar() {
+        document.getElementById('formActualizar').style.display = 'none';
+        // Opcional: limpiar los campos del formulario al ocultarlo
+        // document.getElementById('formActualizar').querySelector('form').reset();
+      }
+
+      // Función para mostrar el formulario y precargar los datos
+      function mostrarFormActualizar(equipo) {
+        document.getElementById('formActualizar').style.display = 'block';
+
+        // Precargar los campos con los datos del equipo
+        document.getElementById('updateEquipoId').value = equipo.id_equipo; // Asegúrate que el campo ID se llama 'id_equipo' en tu objeto de Flask
+        document.getElementById('updateNumeroSerie').value = equipo.numero_serie;
+        document.getElementById('updateMarca').value = equipo.marca;
+        document.getElementById('updateModelo').value = equipo.modelo;
+        document.getElementById('updateTipoDispositivo').value = equipo.tipo_dispositivo;
+        document.getElementById('updateProcesador').value = equipo.procesador;
+        document.getElementById('updateRam').value = equipo.ram_capacidad;
+        document.getElementById('updateAlmacenamiento').value = equipo.almacenamiento;
+        document.getElementById('updateSistemaOperativo').value = equipo.sistema_operativo;
+        document.getElementById('updateEstado').value = equipo.estado;
+        document.getElementById('updateUbicacion').value = equipo.ubicacion;
+        document.getElementById('updateFechaAdquisicion').value = equipo.fecha_adquisicion; // Asegúrate formato YYYY-MM-DD para input type="date"
+        document.getElementById('updateUsuarioAsignado').value = equipo.usuario_asignado;
+      }
+    </script>
+
+
+    <div class="row justify-content-end">
+      <div class="col-md-6 mt-4 py-2">
+        <input type="search" id="search" class="form-control border-0 shadow-none" placeholder="Buscar equipo..."
+          onkeyup="buscadorTable('tbl_equipos')" />
+      </div>
+    </div>
+
+    <div class="row justify-content-center mb-2">
+      <div class="table-responsive">
+        <table id="tbl_equipos" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Número de Serie</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Tipo de Dispositivo</th>
+              <th>Estado</th>
+              <th>Ubicación</th>
+              <th class="text-center">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for equipo in equipos %}
+            <tr id="equipo-{{ equipo.id_equipo }}">
+              <td>{{ equipo.id_equipo }}</td>
+              <td>{{ equipo.numero_serie }}</td>
+              <td>{{ equipo.marca }}</td>
+              <td>{{ equipo.modelo }}</td>
+              <td>{{ equipo.tipo_dispositivo }}</td>
+              <td>{{ equipo.estado }}</td>
+              <td>{{ equipo.ubicacion }}</td>
+              <td width="160px" class="text-center">
+                <button type="button" class="btn btn-info btn-sm me-1" onclick="verDetallesEquipo({{ equipo | tojson }})" data-bs-toggle="modal" data-bs-target="#modalDetallesEquipo">
+                  <i class="bi bi-eye"></i> Detalles
+                </button>
+                <a onclick="mostrarFormActualizar({{ equipo | tojson }})" class="btn btn-success btn-sm me-1" tooltip="Actualizar Registro">
+                  <i class="bi bi-arrow-clockwise"></i> Actualizar
+                </a>
+                <a href="{{ url_for('borrarEquipo', id_equipo = equipo.id_equipo) }}" class="btn btn-danger btn-sm"
+                  data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                  title="<span>Eliminar equipo {{ equipo.numero_serie }}</span>">
+                  <i class="bi bi-trash3"></i> Eliminar
+                </a>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="8" class="text-center">No hay equipos registrados todavía.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalDetallesEquipo" tabindex="-1" aria-labelledby="modalDetallesEquipoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header eva-header">
+            <h5 class="modal-title" id="modalDetallesEquipoLabel">Detalles del Equipo: <span id="detalleNumeroSerie"></span></h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>ID:</strong> <span id="detalleId"></span></p>
+                <p><strong>Número de Serie:</strong> <span id="detalleSerie"></span></p>
+                <p><strong>Marca:</strong> <span id="detalleMarca"></span></p>
+                <p><strong>Modelo:</strong> <span id="detalleModelo"></span></p>
+                <p><strong>Tipo de Dispositivo:</strong> <span id="detalleTipoDispositivo"></span></p>
+                <p><strong>Procesador:</strong> <span id="detalleProcesador"></span></p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Memoria RAM:</strong> <span id="detalleRam"></span> GB</p>
+                <p><strong>Almacenamiento:</strong> <span id="detalleAlmacenamiento"></span></p>
+                <p><strong>Sistema Operativo:</strong> <span id="detalleSO"></span></p>
+                <p><strong>Estado:</strong> <span id="detalleEstado"></span></p>
+                <p><strong>Ubicación/Departamento:</strong> <span id="detalleUbicacion"></span></p>
+                <p><strong>Fecha de Adquisición:</strong> <span id="detalleFechaAdquisicion"></span></p>
+                <p><strong>Usuario Asignado:</strong> <span id="detalleUsuarioAsignado"></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // La función mostrarFormActualizar ya la teníamos y es la misma que la de arriba.
+      // Puedes eliminar una de las dos definiciones si están duplicadas en tu archivo final,
+      // pero ambas son funcionalmente idénticas y correctas para este propósito.
+
+      // Función para mostrar detalles en el modal
+      function verDetallesEquipo(equipo) {
+        console.log("Objeto equipo recibido:", equipo);
+        document.getElementById('detalleNumeroSerie').innerText = equipo.numero_serie; // Para el título del modal
+        document.getElementById('detalleId').innerText = equipo.id_equipo;
+        document.getElementById('detalleSerie').innerText = equipo.numero_serie;
+        document.getElementById('detalleMarca').innerText = equipo.marca;
+        document.getElementById('detalleModelo').innerText = equipo.modelo;
+        document.getElementById('detalleTipoDispositivo').innerText = equipo.tipo_dispositivo;
+        document.getElementById('detalleProcesador').innerText = equipo.procesador;
+        document.getElementById('detalleRam').innerText = equipo.ram_capacidad;
+        document.getElementById('detalleAlmacenamiento').innerText = equipo.almacenamiento;
+        document.getElementById('detalleSO').innerText = equipo.sistema_operativo;
+        document.getElementById('detalleEstado').innerText = equipo.estado;
+        document.getElementById('detalleUbicacion').innerText = equipo.ubicacion;
+        document.getElementById('detalleFechaAdquisicion').innerText = equipo.fecha_adquisicion;
+        document.getElementById('detalleUsuarioAsignado').innerText = equipo.usuario_asignado;
+      }
+      function mostrarFormActualizar(equipo) {
+        // --- AÑADE ESTA LÍNEA AQUÍ ---
+        console.log("mostrarFormActualizar: Objeto 'equipo' recibido:", equipo);
+
+        document.getElementById('formActualizar').style.display = 'block'; // Asegura que el formulario sea visible
+
+        // Precargar los campos del formulario con los datos del equipo
+        document.getElementById('updateEquipoId').value = equipo.id_equipo;
+        document.getElementById('updateNumeroSerie').value = equipo.numero_serie;
+        document.getElementById('updateMarca').value = equipo.marca;
+        document.getElementById('updateModelo').value = equipo.modelo;
+        document.getElementById('updateTipoDispositivo').value = equipo.tipo_dispositivo; // Asumiendo este nombre
+        document.getElementById('updateProcesador').value = equipo.procesador;
+        document.getElementById('updateRam').value = equipo.ram_capacidad; // Asumiendo este nombre
+        document.getElementById('updateAlmacenamiento').value = equipo.almacenamiento;
+        document.getElementById('updateSO').value = equipo.sistema_operativo; // Asumiendo este nombre
+        document.getElementById('updateEstado').value = equipo.estado;
+        document.getElementById('updateUbicacion').value = equipo.ubicacion;
+        document.getElementById('updateFechaAdquisicion').value = equipo.fecha_adquisicion;
+        document.getElementById('updateUsuarioAsignado').value = equipo.usuario_asignado; // Asumiendo este nombre
+      }
+    </script>
+  </div>
+</div>
+{% endblock %} 
+
+{% block customJS %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
