@@ -61,3 +61,26 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const passwordToggles = document.querySelectorAll('.form-password-toggle .input-group-text');
+    passwordToggles.forEach(toggle => {
+      toggle.addEventListener('click', function (event) {
+        // Prevenir cualquier comportamiento por defecto si el span o el icono tuvieran alguno
+        event.preventDefault();
+        const passwordInput = this.parentElement.querySelector('input[type="password"], input[type="text"]'); // Busca el input dentro del mismo input-group
+        const icon = this.querySelector('i');
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          icon.classList.remove('bx-hide');
+          icon.classList.add('bx-show');
+        } else {
+          passwordInput.type = 'password';
+          icon.classList.remove('bx-show');
+          icon.classList.add('bx-hide');
+        }
+      });
+    });
+  });
+</script>
