@@ -1,5 +1,7 @@
 body {
   font-family: "Open Sans", sans-serif;
+  background-color: #343a40; /* Gris oscuro para el fondo */
+  color: #f8f9fa; /* Color de texto claro por defecto para contraste */
 }
 
 .gj-datepicker-bootstrap [role="right-icon"] button {
@@ -52,7 +54,7 @@ body {
     border: 5px solid white;
   }
   50% {
-    border: 25px solid #08b324;
+    border: 25px solid #6f42c1; /* Morado */
   }
   100% {
     border: 5px solid white;
@@ -64,7 +66,7 @@ body {
     border: 5px solid white;
   }
   50% {
-    border: 25px solid #08b324;
+    border: 25px solid #6f42c1; /* Morado */
   }
   100% {
     border: 5px solid white;
@@ -92,7 +94,7 @@ body {
 }
 
 .bx-menu {
-  background-color: #08b324 !important;
+  background-color: #6f42c1 !important; /* Morado */
   color: #fff;
   padding: 10px 10px;
   border-radius: 50%;
@@ -128,8 +130,8 @@ tbody tr:hover {
 
 .borderCheckbox {
   cursor: pointer;
-  border-color: #08b324;
-  box-shadow: 0 2px 4px 0 rgba(10, 207, 10, 0.4);
+  border-color: #6f42c1; /* Morado */
+  box-shadow: 0 2px 4px 0 rgba(111, 66, 193, 0.4); /* Sombra Morada */
 }
 .pagination {
   justify-content: center;
@@ -148,7 +150,7 @@ tbody tr:hover {
 }
 
 .pesos {
-  background-color: #08b324;
+  background-color: #6f42c1; /* Morado */
   color: #fff;
   padding: 2px;
   border-radius: 10%;
@@ -192,7 +194,7 @@ tbody tr:hover {
 }
 
 .alert-success {
-  background-color: #48c808 !important;
+  background-color: #6f42c1 !important; /* Morado */
   color: #fff !important;
 }
 
@@ -200,7 +202,7 @@ tbody tr:hover {
   text-transform: uppercase !important;
 }
 .btn-primary {
-  background-color: #09c046 !important;
+  background-color: #6f42c1 !important; /* Morado */
   border: none !important;
 }
 .btn-close {
@@ -227,7 +229,7 @@ tbody tr:hover {
 
 #informe_general:hover {
   cursor: pointer;
-  border-bottom: dotted 1px #08b324;
+  border-bottom: dotted 1px #6f42c1; /* Morado */
 }
 
 #search {
@@ -237,4 +239,16 @@ tbody tr:hover {
 
 .acceso {
   line-height: 18px;
+}
+
+.btn-purple-custom {
+  color: #fff;
+  background-color: #6f42c1; /* Morado */
+  border-color: #6f42c1;
+}
+
+.btn-purple-custom:hover {
+  color: #fff;
+  background-color: #5a379e; /* Morado más oscuro para hover */
+  border-color: #533393;
 }
