@@ -270,3 +270,9 @@ tbody tr:hover {
   border-color: #533393; /* Borde morado más oscuro */
   box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.5); /* Sombra de foco morada */
 }
+
+.form-control:focus {
+  border-color: #6f42c1 !important; /* Morado */
+  box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.5) !important; /* Sombra de foco morada */
+  outline: 0; /* Opcional: para remover el outline por defecto del navegador si interfiere */
+}
