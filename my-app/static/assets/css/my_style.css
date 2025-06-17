@@ -203,7 +203,18 @@ tbody tr:hover {
 }
 .btn-primary {
   background-color: #6f42c1 !important; /* Morado */
-  border: none !important;
+  border-color: #6f42c1 !important; /* Borde Morado */
+}
+
+.btn-primary:hover {
+  background-color: #5a379e !important; /* Morado más oscuro */
+  border-color: #533393 !important; /* Borde morado más oscuro */
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  background-color: #5a379e !important; /* Morado más oscuro */
+  border-color: #533393 !important; /* Borde morado más oscuro */
+  box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.5) !important; /* Sombra de foco morada */
 }
 .btn-close {
   width: auto !important;
@@ -251,4 +262,11 @@ tbody tr:hover {
   color: #fff;
   background-color: #5a379e; /* Morado más oscuro para hover */
   border-color: #533393;
+}
+
+.btn-purple-custom:focus, .btn-purple-custom.focus {
+  color: #fff;
+  background-color: #5a379e; /* Morado más oscuro */
+  border-color: #533393; /* Borde morado más oscuro */
+  box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.5); /* Sombra de foco morada */
 }
