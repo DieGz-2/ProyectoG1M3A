@@ -204,6 +204,7 @@ tbody tr:hover {
 .btn-primary {
   background-color: #6f42c1 !important; /* Morado */
   border-color: #6f42c1 !important; /* Borde Morado */
+  background-color: #6f42c1 !important; /* Fondo Morado */
 }
 
 .btn-primary:hover {
@@ -273,7 +274,7 @@ tbody tr:hover {
 
 .form-control:focus {
   border-color: #6f42c1 !important; /* Morado */
-  box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.5) !important; /* Sombra de foco morada */
+  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25) !important; /* Sombra de foco morada */
   outline: 0; /* Opcional: para remover el outline por defecto del navegador si interfiere */
 }
 
