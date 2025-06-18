@@ -280,12 +280,14 @@ tbody tr:hover {
 
 .form-control:focus {
   border-color: #6f42c1 !important; /* Morado */
-  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25) !important; /* Sombra de foco morada */
+  box-shadow: 0 0 0 0.15rem rgba(111, 66, 193, 0.2) !important; /* Sombra de foco morada más sutil */
   outline: 0; /* Opcional: para remover el outline por defecto del navegador si interfiere */
+  z-index: 3; /* Asegura que el input y su sombra estén por encima si es necesario */
 }
 
 /* Asegura que el input-group-text tenga borde morado y sin sombra no deseada cuando el input interno está enfocado */
 .input-group:focus-within .input-group-text {
   border-color: #6f42c1 !important; /* Morado */
-  box-shadow: none !important; /* Elimina cualquier sombra heredada o específica del tema */
+  box-shadow: 0 0 0 0.15rem rgba(111, 66, 193, 0.2) !important; /* Sombra de foco morada sutil, igual al input */
+  /* z-index: 3; Si el input-group-text está antes del input en el DOM, esto podría ser necesario */
 }
