@@ -287,7 +287,8 @@ tbody tr:hover {
 
 /* Asegura que el input-group-text tenga borde morado y sin sombra no deseada cuando el input interno está enfocado */
 .input-group:focus-within .input-group-text {
-  border-color: #6f42c1 !important; /* Morado */
-  box-shadow: 0 0 0 0.15rem rgba(111, 66, 193, 0.2) !important; /* Sombra de foco morada sutil, igual al input */
-  /* z-index: 3; Si el input-group-text está antes del input en el DOM, esto podría ser necesario */
+  border-color: #6f42c1 !important; /* Borde morado para el addon */
+  box-shadow: none !important;      /* SIN sombra para el addon para evitar superposición */
+  position: relative; /* Necesario para que z-index tenga efecto si no es un elemento posicionado */
+  z-index: 1;         /* Coloca el addon detrás de la sombra del input si es necesario */
 }
