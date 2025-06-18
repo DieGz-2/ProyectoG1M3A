@@ -54,7 +54,7 @@ body {
     border: 5px solid white;
   }
   50% {
-    border: 25px solid #6f42c1; /* Morado */
+    border: 25px solid #6f42c1; /* Morado - Mantengo este para el loader, asumo que es intencional */
   }
   100% {
     border: 5px solid white;
@@ -66,7 +66,7 @@ body {
     border: 5px solid white;
   }
   50% {
-    border: 25px solid #6f42c1; /* Morado */
+    border: 25px solid #6f42c1; /* Morado - Mantengo este para el loader, asumo que es intencional */
   }
   100% {
     border: 5px solid white;
@@ -194,29 +194,32 @@ tbody tr:hover {
 }
 
 .alert-success {
-  background-color: #6f42c1 !important; /* Morado */
+  background-color: #6f42c1 !important; /* Morado - asumo que es intencional */
   color: #fff !important;
 }
 
 .mayuscula {
   text-transform: uppercase !important;
 }
+
+/* MODIFICACIONES PARA EL BOTÓN PRIMARIO A MORADO */
 .btn-primary {
-  background-color: #6f42c1 !important; /* Morado */
-  border-color: #6f42c1 !important; /* Borde Morado */
   background-color: #6f42c1 !important; /* Fondo Morado */
+  border-color: #6f42c1 !important; /* Borde Morado */
 }
 
 .btn-primary:hover {
-  background-color: #5a379e !important; /* Morado más oscuro */
-  border-color: #533393 !important; /* Borde morado más oscuro */
+  background-color: #5a379e !important; /* Morado más oscuro para hover */
+  border-color: #533393 !important; /* Borde morado más oscuro para hover */
 }
 
 .btn-primary:focus, .btn-primary.focus {
-  background-color: #5a379e !important; /* Morado más oscuro */
-  border-color: #533393 !important; /* Borde morado más oscuro */
+  background-color: #5a379e !important; /* Morado más oscuro para focus */
+  border-color: #533393 !important; /* Borde morado más oscuro para focus */
   box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.5) !important; /* Sombra de foco morada */
 }
+/* FIN DE MODIFICACIONES */
+
 .btn-close {
   width: auto !important;
   height: auto !important;
