@@ -207,6 +207,7 @@ tbody tr:hover {
 .btn-primary {
   background-color: #6f42c1 !important; /* Fondo Morado */
   border-color: #6f42c1 !important; /* Borde Morado */
+  box-shadow: none !important; /* Asegura que no haya sombra en el estado normal */
 }
 
 .btn-primary:hover {
